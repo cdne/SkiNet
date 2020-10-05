@@ -1,4 +1,4 @@
-﻿namespace SkiNet.API.Entities
+﻿namespace SkiNet.Core.Entities
 {
     public class Product
     {
