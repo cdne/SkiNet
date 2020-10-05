@@ -1,21 +1,20 @@
 using System.Diagnostics;
+using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using SkiNet.API.Data;
 
 namespace SkiNet.API
 {
     public class Startup
     {
-        private readonly IConfiguration _configuration;
-
         public Startup(IConfiguration configuration)
         {
-            _configuration = configuration;
         }
 
         public IConfiguration Configuration { get; set; }
@@ -24,9 +23,10 @@ namespace SkiNet.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            
             services.AddDbContext<StoreContext>(options =>
             {
-                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
+                options.UseSqlite("Data source=skinet.db");
             });
         }
 
