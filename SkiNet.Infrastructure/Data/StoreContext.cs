@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SkiNet.API.Entities;
+using SkiNet.Core.Entities;
 
-namespace SkiNet.API.Data
+namespace Skinet.Infrastructure.Data
 {
     public class StoreContext : DbContext
     {
