@@ -1,4 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SkiNet.API.Data;
+using SkiNet.API.Entities;
 
 namespace SkiNet.API.Controllers
 {
@@ -6,16 +12,25 @@ namespace SkiNet.API.Controllers
     [Route("api/[controller]")]
     public class ProductsController : ControllerBase
     {
-        [HttpGet]
-        public string GetProducts()
+        private readonly StoreContext _context;
+
+        public ProductsController(StoreContext context)
         {
-            return "list of products";
+            _context = context;
+        }
+        
+        [HttpGet]
+        public async Task<ActionResult<List<Product>>> GetProducts()
+        {
+            var products = await _context.Products.ToListAsync();
+
+            return Ok(products);
         }
 
-        [HttpGet("{product}")]
-        public string GetProduct(string product)
+        [HttpGet("{id}")]
+        public async Task<Product> GetProduct(int id)
         {
-            return $"single product {product}";
+            return await _context.Products.FindAsync(id);
         }
     }
 }
