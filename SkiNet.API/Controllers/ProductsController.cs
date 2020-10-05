@@ -3,8 +3,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SkiNet.API.Data;
-using SkiNet.API.Entities;
+using SkiNet.Core.Entities;
+using Skinet.Infrastructure.Data;
+
 
 namespace SkiNet.API.Controllers
 {
